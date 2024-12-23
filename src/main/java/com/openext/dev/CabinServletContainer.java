@@ -13,6 +13,10 @@ import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * A simple servlet container that listens on a port and dispatches requests to registered servlets.
+ * Author: Sang Le
+ */
 public class CabinServletContainer {
     private Map<String, SimpleServlet> servlets = new HashMap<>();
 
@@ -40,7 +44,7 @@ public class CabinServletContainer {
             SimpleServletResponse response = new SimpleServletResponseImpl(outputStream);
 
             SimpleServlet servlet = servlets.get(request.getPath());
-            
+
             if (servlet != null) {
                 servlet.service(request, response);
             } else {
