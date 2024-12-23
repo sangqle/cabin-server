@@ -24,14 +24,15 @@ public class SimpleServletRequestImpl implements SimpleServletRequest {
 
             // Read the request line
             String requestLine = reader.readLine();
-            if (requestLine == null || requestLine.isEmpty()) {
-                throw new IOException("Malformed HTTP request: Request line is empty");
+
+            if(requestLine == null || requestLine.isEmpty()) {
+                return;
             }
 
             // Split the request line into components
             String[] requestParts = requestLine.split(" ");
             if (requestParts.length != 3) {
-                throw new IOException("Malformed HTTP request: Invalid request line");
+                System.err.println("Malformed HTTP request: " + requestLine);
             }
 
             // Extract the HTTP method, path, and version
