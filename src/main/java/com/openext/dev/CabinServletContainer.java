@@ -13,7 +13,7 @@ import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SimpleServletContainer {
+public class CabinServletContainer {
     private Map<String, SimpleServlet> servlets = new HashMap<>();
 
     public void registerServlet(String path, SimpleServlet servlet) {
@@ -40,8 +40,7 @@ public class SimpleServletContainer {
             SimpleServletResponse response = new SimpleServletResponseImpl(outputStream);
 
             SimpleServlet servlet = servlets.get(request.getPath());
-            System.err.println("Request path received: " + request.getPath());
-            System.err.println("Request received: " + servlet);
+            
             if (servlet != null) {
                 servlet.service(request, response);
             } else {
@@ -49,7 +48,6 @@ public class SimpleServletContainer {
                 response.writeBody("Not Found");
             }
 
-            System.err.println("Request processed");
             response.sendResponse();
 
         } catch (Exception e) {
@@ -58,7 +56,7 @@ public class SimpleServletContainer {
     }
 
     public static void main(String[] args) throws Exception {
-        SimpleServletContainer container = new SimpleServletContainer();
+        CabinServletContainer container = new CabinServletContainer();
 
         // Register a simple servlet
         container.registerServlet("/hello", new SimpleServlet() {
